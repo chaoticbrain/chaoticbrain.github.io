@@ -9,4 +9,12 @@ I am a software developer by profession, as the saying goes: Every good develope
 ## Getting the ball rolling.
 Seemingly, like everythign I try to do, what should have been a 5 minute task `setup github pages blog ` turned into a 3 hour mess. 
 
+### Jekyll 2.5.3
+
+### Separate Account
+
+### CNAME wft?
+
+
+
 
