@@ -1,0 +1,23 @@
+# Dependencies
+markdown:         redcarpet
+highlighter:      pygments
+
+# Permalinks
+permalink:        pretty
+relative_permalinks: true
+
+# Setup
+title:            Chaotic Brain
+tagline:          Chasing shiny objects 
+url:              http://chaoticbrain.me
+paginate:         1
+baseurl:          /
+author:
+  name:           David J Just 
+  url:            http://chaoticbrain.me
+  email:          4chaoticbrain@gmail.com
+
+# Custom vars
+version:          1.0.0
+github:
+  repo:           https://github.com/chaoticbrain/chaoticbrain.github.io
