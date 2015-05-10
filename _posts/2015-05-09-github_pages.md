@@ -7,7 +7,7 @@ title: Getting the ball rolling
 I am a software developer by profession, as the saying goes: Every good developer should have a blog. Right? So there's that.  But mainly this will be a holding ground for things I wish to re-remember or just find neat.  If others find it helpfull or amusing or whatever that's nice, but mainly it's for me. 
 
 ## Getting the ball rolling.
-Seemingly, like everythign I try to do, what should have been a 5 minute task *setup github pages blog * turned into a mess. 
+Seemingly, like everythign I try to do, what should have been a 5 minute task **setup github pages blog** turned into a mess. 
 
 ### Jekyll 2.5.3
 Hmm, well we want a blog. Github has this handy feature of github pages.  A nice short guide here: https://help.github.com/articles/using-jekyll-with-pages/ has all of three commands to supposedly get a github compatable Jekyll sight up and running...
@@ -60,7 +60,8 @@ bundle exec jekyll serve
 
 Yay! 
 #### lesson learned: 
-    Currently github-pages bundle requires the 2.4.0 version of jekyll and won't run if you have a higher version.  The Poole howto says to run `jekyll server` but github pages prefers that you use bundle to serve the site `bundle exec jekyll server` if you want to recreate the github environment.
+
+Currently github-pages bundle requires the 2.4.0 version of jekyll and won't run if you have a higher version.  The Poole howto says to run `jekyll server` but github pages prefers that you use bundle to serve the site `bundle exec jekyll server` if you want to recreate the github environment.
 
 ### Separate Account vs CNAME
 
@@ -68,8 +69,8 @@ I decided that a separate accounts for the chaoticbrain work would be wise, and 
 
 Then I followed the info to get my domain connected:
 
-[github's domain setup](http://help.github.com/articles/setting-up-a-custom-domain-with-github-pages/)
-[namecheap with github](http://davidensinger.com/2013/03/setting-the-dns-for-github-pages-on-namecheap/)
+* [github's domain setup](http://help.github.com/articles/setting-up-a-custom-domain-with-github-pages/)
+* [namecheap with github](http://davidensinger.com/2013/03/setting-the-dns-for-github-pages-on-namecheap/)
 
 And tried to use it:
 >Error 404.  
