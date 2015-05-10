@@ -20,7 +20,7 @@ bundle install
 ```
 
 3 months later... (I never said I was in a hurry)
-After forgetting where I was, and finally getting back to it. I found [Poole](https://github.com/poole/poole)
+After forgetting where I was, and finally getting back to it. I found [Poole](https://github.com/poole/poole) and [joshualande's post](http://joshualande.com/jekyll-github-pages-poole/)
 
 #### Step 1: 
 
