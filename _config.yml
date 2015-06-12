@@ -9,7 +9,7 @@ permalink:        /blog/:year/:month/:day/:title
 # Setup
 title:            Chaotic Brain
 tagline:          Chasing shiny objects
-url:              'http://localhost:4000'
+url:              'http://chaoticbrain.me'
 paginate:         1
 baseurl:          ''
 author:
