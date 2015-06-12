@@ -19,8 +19,19 @@
 }
 
 #pin {
-    color: #fff;
+  color: #fff;
+  text-shadow:
+       3px 3px 10px #000,
+     -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+       1px 1px 0 #000;
+  font-size: 55px;
+  font-weight: bold;
 }
+/*#pin::first-letter{
+  color: #00A600
+}*/
 
 .tile > h3 {
     font-size: 24px;
@@ -150,30 +161,30 @@
 
 /* Media queries for animated tiles (narmal size) */
 
-@media only screen 
+@media only screen
 and (min-width : 1224px) {
 .fix-3 {
 	width: 16.6% !important;
 }
 }
 
-@media only screen 
-and (min-width : 320px) 
+@media only screen
+and (min-width : 320px)
 and (max-width : 768px) {
 .fix-3 {
 	width: 50% !important;
 }
 }
 
-@media only screen 
-and (min-width : 768px) 
+@media only screen
+and (min-width : 768px)
 and (max-width : 1224px) {
 .fix-3 {
 	width: 25% !important;
 }
 }
 
-@media only screen 
+@media only screen
 and (max-width : 320px) {
 .fix-3{
 	width: 50% !important;
