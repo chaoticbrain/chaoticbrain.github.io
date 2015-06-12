@@ -37,15 +37,17 @@ By replacing httplib2 with the requests library I was able to strip code related
 
 ### What was lost
 * Caching
-* Use of /tmp during non-specified file downloads.  `get()` now saves files to `~/Downloads/` by default.
+* Use of /tmp during non-specified file downloads.  `get()` now saves files to `~/Downloads/` by default. This has been tested on Mac and Linux. It should also work on windows. Although it is better to use `get('/put/stuff/here')` so you know where your file is going.
 
 
 ### What was gained
 * Simplified code
 * Convenience methods on the interface: get/put/post/delete
 * More information in error messages
-* Streaming file downloads
-* Streaming file uploads
+* Streaming file downloads AND uploads
+  * Happens automatically. No code changes to see improvements.
+  * Greatly reduces pyxnat memory footprint.
+
 
 ### What about backward compatibility
 It should be backward compatible except where caching is involved.  If you were relying on the cache locations for something that code will have to change.
