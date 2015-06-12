@@ -7,18 +7,23 @@ highlighter: pygments
 permalink:        /blog/:year/:month/:day/:title
 
 # Setup
-title:            'David J. Just'
-tagline:          'Mehh'
-description:      'Yet another developer blog '
+title:            Chaotic Brain
+tagline:          Chasing shiny objects
 url:              'http://localhost:4000'
+paginate:         1
 baseurl:          ''
+author:
+  name:           David J Just
+  url:            http://chaoticbrain.me
+  email:          4chaoticbrain@gmail.com
+
 
 # Navigation
 navigation:
 - text: About
   url: /about/
 - text: Resume
-  url: /resume/
+  url: http://davidjjust.me
 - text: Blog
   url: /blog/
 - text: Tags
@@ -54,8 +59,8 @@ footer-links:
   linkedin: 'DavidJJust'
   pinterest:
   rss: 'rss'# just type anything here for a working RSS icon, make sure you set the "url" above!
-  google: 
-  twitter: 
+  google:
+  twitter:
   stackoverflow: 'users/248340/david-just' #users/4388898/peter-zhu # your stackoverflow profile, e.g. "users/50476/bart-kiers"
 
 # Disqus
