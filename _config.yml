@@ -15,7 +15,7 @@ baseurl:          ''
 author:
   name:           David J Just
   url:            http://chaoticbrain.me
-  email:          4chaoticbrain@gmail.com
+  email:          davidjjust@gmail.com
 
 
 # Navigation
@@ -23,7 +23,7 @@ navigation:
 - text: About
   url: /about/
 - text: Resume
-  url: http://davidjjust.me
+  url: /resume/
 - text: Blog
   url: /blog/
 - text: Tags
