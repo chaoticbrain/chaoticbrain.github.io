@@ -1,23 +1,70 @@
-# Dependencies
-markdown:         redcarpet
-highlighter:      pygments
+# Configurations
+markdown: kramdown
+markdown_ext:  markdown,mkdown,mkdn,mkd,md
+highlighter: pygments
 
 # Permalinks
-permalink:        pretty
-relative_permalinks: true
+permalink:        /blog/:year/:month/:day/:title
 
 # Setup
-title:            Chaotic Brain
-tagline:          Chasing shiny objects 
-url:              http://chaoticbrain.me
-paginate:         1
-baseurl:          /
-author:
-  name:           David J Just 
-  url:            http://chaoticbrain.me
-  email:          4chaoticbrain@gmail.com
+title:            'David J. Just'
+tagline:          'Mehh'
+description:      'Yet another developer blog '
+url:              'http://localhost:4000'
+baseurl:          ''
+
+# Navigation
+navigation:
+- text: About
+  url: /about/
+- text: Resume
+  url: /resume/
+- text: Blog
+  url: /blog/
+- text: Tags
+  url: /tags/
+- text: Archive
+  url : /archive/
+
+
+# Author Details
+author:         'David J Just'
+
+#Social Media links
+linkedin:       'https://www.linkedin.com/in/DavidJJust'
+facebook:       'https://www.facebook.com/davidjjust'
+github:         'https://github.com/DavidJJ'
+stackoverflow:  'http://stackoverflow.com/users/248340/david-just'
+gplus:          ''
+
+# Google Analytics
+gahandler: ''
+
+#if footer-links-visible is 'true' the svg-icons will be shown top on the copy right.
+#else the svg icons will not exist
+footersvg: 'true'
+
+footer-links:
+  dribbble:
+  email: 'davidjjust@gmail.com'
+  facebook: 'davidjjust'
+  flickr:
+  github: 'DavidJJ'
+  instagram:
+  linkedin: 'DavidJJust'
+  pinterest:
+  rss: 'rss'# just type anything here for a working RSS icon, make sure you set the "url" above!
+  google: 
+  twitter: 
+  stackoverflow: 'users/248340/david-just' #users/4388898/peter-zhu # your stackoverflow profile, e.g. "users/50476/bart-kiers"
+
+# Disqus
+disqushandler: ''
+
+# Blog Configurations
+paginate: 10 # Posts per page on the blog index
+paginate_path: '/blog/page:num'
+destination: ./_site
 
 # Custom vars
-version:          1.0.0
-github:
-  repo:           https://github.com/chaoticbrain/chaoticbrain.github.io
+version:          0.8
