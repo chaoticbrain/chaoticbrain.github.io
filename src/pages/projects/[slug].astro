@@ -1,0 +1,51 @@
+---
+import { CollectionEntry, getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import createSlug from "../../lib/createSlug";
+import { Image } from "astro:assets";
+
+export async function getStaticPaths() {
+  const projectEntries = await getCollection("projects");
+  return projectEntries.map((entry) => ({
+    params: { slug: createSlug(entry.data.title, entry.slug) },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<"projects">;
+}
+
+const { entry } = Astro.props;
+const project = entry.data;
+const { Content } = await entry.render();
+---
+
+<BaseLayout title={project.title} description={project.description} image={project.heroImage?.src}>
+  <main class="md:flex md:justify-center">
+    <article class="prose prose-lg max-w-[750px] prose-img:mx-auto">
+      {project.heroImage && (
+        <Image
+          width={750}
+          height={422}
+          format="webp"
+          src={project.heroImage}
+          alt={project.title}
+          class="w-full mb-6"
+        />
+      )}
+      <h1 class="title my-2 text-4xl font-bold">{project.title}</h1>
+      {project.badge && <div class="badge badge-secondary my-1">{project.badge}</div>}
+      {
+        project.tags &&
+          project.tags.map((tag) => (
+            <a href={`/projects/tag/${tag}`} class="badge badge-outline ml-2 no-underline">
+              {tag}
+            </a>
+          ))
+      }
+      <div class="divider my-2"></div>
+      <Content />
+    </article>
+  </main>
+</BaseLayout>
