@@ -12,6 +12,17 @@ const { page } = Astro.props;
 ---
 
 <BaseLayout title="Store" sideBarActiveItemID="store">
+  <div class="mb-8">
+    <div class="text-3xl w-full font-bold mb-4">Store</div>
+    <p class="text-lg">
+      Everything here is something I made for myself first. If it turned out useful enough to be
+      worth sharing, I listed it on eBay so others could benefit from it too.
+    </p>
+    <p class="mt-3">
+      I'm not trying to run a business — the price mostly covers the time, materials, and effort
+      that went into making each item. If it helps you out, that's the point.
+    </p>
+  </div>
   <ul>
     {
       page.data.map((item) => (
