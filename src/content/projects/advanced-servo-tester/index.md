@@ -146,9 +146,16 @@ I ended up reverting to the blank case and taking a detour to figure out how to:
 4. Import those back into the main case design as cutting tools and as printable bodies. 
 
 
+### Final Result 
 
+![Finished Servo Tester](./Servo-Tester-1.png)
 
+The final result for this iteration is a functional servo tester that satisfied all of my original requirements
+(and then some).  
 
+I ended up building a few of these, so I am planning on selling some of them on E-bay. 
+Sure, they are not production quality, but they are fully functional, more useful than the cheap ones, 
+and will be sold cheaper than the expensive ones. 
 
 
 
