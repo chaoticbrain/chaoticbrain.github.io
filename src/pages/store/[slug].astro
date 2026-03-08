@@ -1,6 +1,5 @@
 ---
 import { CollectionEntry, getCollection } from "astro:content";
-import { StoreSchema } from "../../content/config";
 import StoreItemLayout from "../../layouts/StoreItemLayout.astro";
 
 export async function getStaticPaths() {
@@ -16,7 +15,7 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-const item: StoreSchema = entry.data;
+const item = entry.data;
 const { Content } = await entry.render();
 ---
 
@@ -25,7 +24,6 @@ const { Content } = await entry.render();
   description={item.description}
   heroImage={item.heroImage}
   updatedDate={item.updatedDate}
-  heroImage={item.heroImage}
   pricing={item.pricing}
   oldPricing={item.oldPricing}
   checkoutUrl={item.checkoutUrl}

@@ -5,8 +5,9 @@ import { getCollection } from "astro:content";
 import createSlug from "../lib/createSlug"
 
 const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-
 const last_posts = posts.slice(0, 3);
+
+const projects = await getCollection("projects");
 ---
 
 <BaseLayout sideBarActiveItemID="home">
@@ -30,27 +31,21 @@ const last_posts = posts.slice(0, 3);
     <div class="text-3xl w-full font-bold mb-2">Projects</div>
   </div>
 
-  <HorizontalCard
-    title="Project One"
-    img="/post_img.webp"
-    desc="Coming soon — description of this project."
-    url="#"
-    badge="WIP"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="Project Two"
-    img="/post_img.webp"
-    desc="Coming soon — description of this project."
-    url="#"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="Project Three"
-    img="/post_img.webp"
-    desc="Coming soon — description of this project."
-    url="#"
-  />
+  {
+    projects.map((project, index) => (
+      <>
+        <HorizontalCard
+          title={project.data.title}
+          img={project.data.heroImage}
+          desc={project.data.description}
+          url={"/projects/" + createSlug(project.data.title, project.slug)}
+          target="_self"
+          badge={project.data.badge}
+        />
+        {index < projects.length - 1 && <div class="divider my-0" />}
+      </>
+    ))
+  }
 
   <div>
     <div class="text-3xl w-full font-bold mb-5 mt-10">Latest from blog</div>
