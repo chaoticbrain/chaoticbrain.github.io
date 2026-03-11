@@ -41,6 +41,8 @@ Center mode is stable and accurate, regardless of input voltage.
 
 It has more features than what is listed above, but I'm not going to go into the details for now. ;-)
 
+## Design Process
+
 Doing this project sent me down a few different rabbit holes:
  * Embedded programming using Arduino
  * Circuit design using KiCad
