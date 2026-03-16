@@ -227,7 +227,7 @@ The `[page].astro` is the route to work with the paginated item list. You can ch
 
 Add code with this format at the top of each item file.
 
-```js
+```astro    
 ---
 title: "Demo Item 1"
 description: "Item description"
