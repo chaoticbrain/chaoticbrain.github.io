@@ -1,0 +1,114 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import "./update-firmware.css";
+---
+<script is:inline src="/projects/advanced-servo-tester/main.js"></script>
+
+
+<BaseLayout
+        title="Update Firmware — Advanced Servo Tester"
+        description="Instructions for updating the firmware on your Advanced Servo Tester."
+>
+    <script>
+
+    declare global {
+        interface Window {
+            arduinoProgress: (percent: number) => void
+            arduinoLog: (msg: { what: string; sent: number; total: number; pageSize: number; hexLength: number }) => void
+        }
+    }
+
+    window.arduinoProgress = (percent: number) => {
+        console.log('arduinoProgress', percent)
+        document.getElementById('progress-bar')!.style.width = percent + '%'
+        document.getElementById('progress-label')!.textContent = percent + '%'
+    }
+
+    window.arduinoLog = (msg: { what: string; sent: number; total: number; pageSize: number; hexLength: number }) => {
+        const log = document.getElementById('log-output')!
+        const line = document.createElement('div')
+        const parts = [msg.what]
+        if (msg.sent != null && msg.total != null) parts.push(`sent: ${msg.sent} / ${msg.total}`)
+        if (msg.pageSize != null) parts.push(`page: ${msg.pageSize}`)
+        if (msg.hexLength != null) parts.push(`hex: ${msg.hexLength}`)
+        line.textContent = parts.join('  ')
+        log.appendChild(line)
+        log.scrollTop = log.scrollHeight
+    }
+</script>
+    <main class="md:flex md:justify-center">
+        <article class="prose prose-lg max-w-[750px] prose-img:mx-auto">
+            <h1 class="title my-2 text-4xl font-bold">Update Firmware</h1>
+            <p class="text-sm text-base-content/60 mb-4">
+                <a href="/projects/advanced-servo-tester" class="no-underline hover:underline">← Advanced Servo
+                    Tester</a>
+            </p>
+            <div class="divider my-2"/>
+            <p>To update the firmware on your Advanced Servo Tester, connect a
+                <strong>Mini USB</strong> to USB A or USB C cable from your
+                computer to the Advanced Servo Tester.
+            </p>
+            <p>
+                Then click <strong>Upload Latest Firmware</strong> below.
+            </p>
+            <p>
+                A dialog will open with a list of available serial ports. Choose the port
+                that the Advanced Servo Tester is connected to.
+            </p>
+            <p>
+                Click the <strong>Connect</strong> button on the dialog to start the upload.
+            </p>
+
+            <p>
+                <strong>Note:</strong> The cable must be a data cable, not a power-only cable.
+            </p>
+            <p>
+                <strong>Note:</strong> If the upload fails, try <strong>Old Bootloader</strong> — some earlier Arduinos use the old bootloader.
+            </p>
+            <div class="upload-actions">
+                <button
+                        class="btn-upload-primary"
+                        arduino-uploader
+                        arduino-hex="/projects/advanced-servo-tester/firmware.hex"
+                        arduino-board="nano"
+                        arduino-verify
+                        arduino-progress="arduinoProgress"
+                        arduino-log="arduinoLog"
+                >
+                    Upload Latest Firmware
+                </button>
+                <button
+                        class="btn-upload-secondary"
+                        arduino-uploader
+                        arduino-hex="/projects/advanced-servo-tester/firmware.hex"
+                        arduino-board="nanoOldBootloader"
+                        arduino-verify
+                        arduino-progress="arduinoProgress"
+                        arduino-log="arduinoLog"
+                >
+                    Old Bootloader
+                </button>
+                <button
+                        class="btn-upload-debug"
+                        arduino-uploader
+                        arduino-hex="/projects/advanced-servo-tester/Blink.ino.uno.hex"
+                        arduino-board="nano"
+                        arduino-verify
+                        arduino-progress="arduinoProgress"
+                        arduino-log="arduinoLog"
+                        title="Upload Blink test sketch to verify the connection"
+                >
+                    Blink test
+                </button>
+            </div>
+
+            <div id="progress-bar-container">
+                <div id="progress-bar"></div>
+                <div id="progress-label"></div>
+            </div>
+
+            <div id="log-output"></div>
+
+        </article>
+    </main>
+</BaseLayout>
