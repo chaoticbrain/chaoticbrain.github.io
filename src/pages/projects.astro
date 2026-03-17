@@ -21,6 +21,7 @@ const projects = await getCollection("projects");
           desc={project.data.description}
           url={"/projects/" + createSlug(project.data.title, project.slug)}
           badge={project.data.badge}
+
         />
         {index < projects.length - 1 && <div class="divider my-0" />}
       </>

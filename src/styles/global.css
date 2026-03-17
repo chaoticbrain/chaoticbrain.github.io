@@ -1,3 +1,42 @@
+/* Timeline — hide line on last item */
 .time-line-container>div:last-child .education__time>.education__line {
     display: none;
+}
+
+/* ─── Typography ────────────────────────────────────────────────────── */
+
+body {
+    font-family: 'DM Sans', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Syne', sans-serif;
+}
+
+/* Apply Syne to Tailwind Typography prose headings */
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+    font-family: 'Syne', sans-serif;
+}
+
+/* ─── Sidebar nav ───────────────────────────────────────────────────── */
+
+/* Amber accent on the active nav item */
+.nav-active {
+    @apply text-secondary;
+    border-left: 3px solid #E8A000;
+    padding-left: calc(0.75rem - 3px);
+}
+
+/* Hover/focus that works on the navy sidebar background */
+.drawer-side .menu li > *:hover {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Fade mask at the bottom of the sidebar nav — fades to primary navy */
+.sidebar-fade {
+    -webkit-mask-image: linear-gradient(transparent, #1B3A6B);
+    mask-image: linear-gradient(transparent, #1B3A6B);
 }

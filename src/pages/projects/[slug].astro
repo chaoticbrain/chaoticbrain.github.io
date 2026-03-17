@@ -21,7 +21,7 @@ const project = entry.data;
 const { Content } = await entry.render();
 ---
 
-<BaseLayout title={project.title} description={project.description} image={project.heroImage?.src}>
+<BaseLayout title={project.title} description={project.description} image={project.heroImage?.src} sideBarActiveItemID="projects">
   <main class="md:flex md:justify-center">
     <article class="prose prose-lg max-w-[750px] prose-img:mx-auto">
       {project.heroImage && (

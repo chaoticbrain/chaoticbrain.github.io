@@ -6,8 +6,6 @@ const {
   url,
   badge,
   pricing,
-  oldPricing,
-  checkoutUrl,
   details = true,
   custom_link = false,
   custom_link_label = "",
@@ -37,7 +35,6 @@ import { Image } from "astro:assets";
         </h1>
         <div>
           <span class="text-xl mr-1"> {pricing}</span>
-          <span class="text-md opacity-50 line-through">{oldPricing}</span>
         </div>
         <p class="py-1 text-1xl">{desc}</p>
       </div>
