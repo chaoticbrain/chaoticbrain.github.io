@@ -1,6 +1,18 @@
 /* Timeline — hide line on last item */
-.time-line-container>div:last-child .education__time>.education__line {
-    display: none;
+/*.time-line-container>div:last-child .education__time>.education__line {*/
+/*    display: none;*/
+/*}*/
+.time-line-container{
+    >div:not(:first-child) {
+        padding-top: 2rem;
+    }
+
+    >div:not(:last-child) .education__time>.education__line{
+        height: calc(100% + 2rem);
+    }
+    >div:last-child .education__time>.education__line{
+        height: calc(100% - 2rem);
+    }
 }
 
 /* ─── Typography ────────────────────────────────────────────────────── */
