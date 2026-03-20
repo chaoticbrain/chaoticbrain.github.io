@@ -28,6 +28,7 @@ const storeSchema = ({ image }: { image: Function }) => z.object({
 const projectSchema = ({ image }: { image: Function }) => z.object({
     title: z.string(),
     description: z.string(),
+    pubDate: z.coerce.date(),
     heroImage: image().optional(),
     badge: z.string().optional(),
     tags: z.array(z.string()).refine(items => new Set(items).size === items.length, {

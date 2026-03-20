@@ -1,6 +1,7 @@
 ---
 title: "Project Greenfly"
 description: "A website and app for logging flights on RC drones — track locations, battery cycles, flight time, and maintenance history."
+pubDate: "2025-10-10"
 badge: "WIP"
 tags: ["web", "app", "rc", "drones"]
 ---

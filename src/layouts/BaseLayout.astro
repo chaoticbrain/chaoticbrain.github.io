@@ -6,6 +6,7 @@ import SideBar from "../components/SideBar.astro";
 import { ViewTransitions } from "astro:transitions";
 
 import { SITE_TITLE, SITE_DESCRIPTION, TRANSITION_API } from "../config";
+import Lightbox from "../components/Lightbox.astro";
 
 const {
   image,
@@ -37,5 +38,7 @@ const {
       </div>
       {includeSidebar && <SideBar sideBarActiveItemID={sideBarActiveItemID} />}
     </div>
+
+    <Lightbox />
   </body>
 </html>

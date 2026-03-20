@@ -1,6 +1,7 @@
 ---
 title: "Advanced Servo Tester"
-description: "An RC servo tester with more features than the simple off-the-shelf variety — variable pulse width, speed control, and sweep modes."
+description: "An RC servo tester with more features than the simple off-the-shelf variety."
+pubDate: "2026-01-15"
 heroImage: "./ServoTester.png"
 badge: "WIP"
 tags: ["hardware", "rc", "embedded"]

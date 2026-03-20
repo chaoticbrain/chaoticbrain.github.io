@@ -1,0 +1,53 @@
+---
+---
+
+<div class="lightbox" id="lightbox" aria-modal="true" role="dialog">
+  <img id="lightbox-img" src="" alt="" />
+</div>
+
+<script>
+  const lightbox = document.getElementById("lightbox")!;
+  const lightboxImg = document.getElementById("lightbox-img") as HTMLImageElement;
+
+  document.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    if (!target.matches(".photo-gallery img")) return;
+
+    const thumb = target as HTMLImageElement;
+    const fromRect = thumb.getBoundingClientRect();
+
+    lightboxImg.src = thumb.src;
+    lightboxImg.alt = thumb.getAttribute("alt") ?? "";
+    lightbox.classList.add("open");
+
+    // After layout, compute where the lightbox image landed and FLIP animate
+    requestAnimationFrame(() => {
+      const toRect = lightboxImg.getBoundingClientRect();
+
+      const dx = fromRect.left + fromRect.width / 2 - (toRect.left + toRect.width / 2);
+      const dy = fromRect.top + fromRect.height / 2 - (toRect.top + toRect.height / 2);
+      const sx = fromRect.width / toRect.width;
+      const sy = fromRect.height / toRect.height;
+
+      lightboxImg.animate(
+        [
+          { transform: `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})` },
+          { transform: "translate(0, 0) scale(1)" },
+        ],
+        { duration: 320, easing: "cubic-bezier(0.2, 0, 0, 1)" }
+      );
+    });
+  });
+
+  function close() {
+    lightbox.classList.remove("open");
+  }
+
+  lightbox.addEventListener("click", (e) => {
+    if (e.target !== lightboxImg) close();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") close();
+  });
+</script>
