@@ -13,20 +13,20 @@ RC Servo testers today fall into two categories:
 - Cheap servo testers
   - One button to cycle through 3 modes
   - Often inaccurate centering.
-- Expensive servo testers that offer a lot more functionality 
+- Expensive servo testers that offer a lot more functionality
   - Cost $60+
-  - Take significant time to start up, 
-  - Take multiple key presses to get to simple functions.
-  
-The pressure point for this project was the cycling through modes to go between Manual mode and Center mode. 
-I have broken control horns and stripped gears from going through Sweep to get to Manual mode.
+  - Take significant time to start up.
+  - Take multiple key presses to get to basic functions.
 
-So I built a servo tester that offers more functionality than the cheap ones, but can come in at a price point that is affordable.
+The specific frustration that initiated this project was cycling through modes to get between Manual and Center.
+I have broken control horns and stripped gears by cycling through Sweep to reach Manual mode.
+
+So I built a servo tester that offers more functionality than the low-cost ones, but at a more affordable price than the expensive ones.
 
 ## Features
 
 ### Three buttons
-Yup, three buttons. Three buttons for three modes.
+Three modes, each with their own dedicated button:
 - Manual Mode
 - Center Mode
 - Sweep Mode
@@ -39,8 +39,10 @@ Adjustable PWM from 1000 to 2000 microseconds using a potentiometer.
 
 ### Center Mode
 Center mode is stable and accurate, regardless of input voltage.
+This is important. A number of my low-cost servo testers have centers that change depending on the input voltage.
 
-It has more features than what is listed above, but I'm not going to go into the details for now. ;-)
+## Additional Features
+There are additional features not covered here — those features I am keeping secret for now.
 
 ## Design Process
 
@@ -48,117 +50,110 @@ Doing this project sent me down a few different rabbit holes:
  * Embedded programming using Arduino
  * Circuit design using KiCad
    * Attempting to use AI to help with the design process.
- * Using Sketches, Assemblies, and Components in FreeCad to correctly align objects on the 3d printed case. 
+ * Using Sketches, Assemblies, and Components in FreeCAD to accurately align objects on the 3D-printed case.
 
 
 #### Arduino programming
 
-I've done a little bit of Arduino programming before, but this was a deeper dive than previous projects.
-In previous projects I've used the Arduino IDE, which while okay, does not offer code analysis. 
-It barely offers syntax highlighting and it does not offer code completion.  
+I have done some Arduino programming before, but this was a deeper dive than previous projects.
+In previous projects I have used the Arduino IDE, which is functional but limited — it offers minimal syntax highlighting and no code completion.
 
-So I switched to using CLion from JetBrains. With the PlatformIO plugin, I have an IDE that I am very familiar with.
-It offers code completion, syntax highlighting, dependency management, and code analysis. 
+So I switched to CLion from JetBrains. With the PlatformIO plugin, I have an IDE I am familiar with.
+It offers code completion, syntax highlighting, dependency management, and code analysis.
 
-Fairly far along in the project, I ran into a problem with the performance of the code.  Instead of getting a stable 50Hz 
-I was getting jumpy, unstable PWM.  It turns out the problem was that I am using a SSD1306 OLED with i2c communication, 
-and the Adafruit display library.  Using the Adafruit library meant that the whole display was being updated every time
-the screen changed.  This was taking up all the memory and updating the display 40+ms which meant the Arduino could 
-not keep up with the 50 Hz PWM rate.  I replaced the Adafruit library with the SSD1306AsciiWire library, re-wrote 
-the display code to ONLY update the parts of the screen that changed, and got the average screen refresh time down to 
-less than 10 ms allowing the Arduino to keep up with the 50 Hz for PWM.
+Fairly far along in the project, I ran into a performance problem. Instead of getting a stable 50 Hz
+I was getting jumpy, unstable PWM. It turns out the problem was that I was using an SSD1306 OLED with I2C communication,
+and the Adafruit display library. Using the Adafruit library meant that the whole display was being updated every time
+the screen changed. This was taking up all the memory, and updating the display was taking 40+ ms, which meant the Arduino could
+not keep up with the 50 Hz PWM rate. I replaced the Adafruit library with the SSD1306AsciiWire library and rewrote
+the display code to only update the parts of the screen that changed. This reduced the average screen refresh time down to
+less than 10 ms, allowing the Arduino to keep up with the 50 Hz PWM rate.
 
-Getting rid of the Adafruit library also reduced the ram usage significantly as it was using a buffer that took up
-a lot of the very limited memory on the Arduino.
+Dropping the Adafruit library also reduced RAM usage because it maintained a full-screen buffer that consumed a large portion of the Arduino's limited memory.
 
 Lessons learned here:
- * Arduino's have very limited ram.
- * AdaFruit libraries offer a lot of functionality at the cost of ram.
- * i2c is slow, even at 400kHz.
+ * Arduino microcontrollers have very limited RAM.
+ * Adafruit libraries trade RAM for functionality.
+ * I2C is slow, even at 400 kHz.
 
 #### Circuit design
 
-The last time I designed a circuit was in 2000.  It was part of a 100-level electronics class.  
-So it has been a while, and the circuit was pretty basic. 
+The last time I designed a circuit was in the early 2000s. It was part of an entry level electronics class, and the circuit was fairly basic.
 
-We live in the dawning of the AI age, and I was hoping that the AI could help with the design process.
-I told Claude about the project, and it helped me design what I thought was a pretty good circuit.
-I wanted to be able to have power come in from either the power in port, the servo out port, or use the power
-from the Arduino's USB port. 
+AI tools have improved significantly, and I hoped they could help with the design process.
+I told Claude about the project, and it helped me design what looked like a solid circuit.
+I wanted the board to accept power from the power input port, the servo output port, or the Arduino's USB port.
 
-I wanted to be pedantic about power loss and prevent reverse polarity, so I was trying to build and use an "ideal diode"
-to direct the power through the various power rails.  I also designed it using "high side switching" meaning that the FETs
-were on the positive side of the circuit. 
+I wanted to be precise about power loss and prevent reverse polarity, so I was trying to build and use an "ideal diode"
+to direct the power through the various power rails. I also designed it using "high side switching," meaning the FETs
+were on the positive side of the circuit.
 
-I used [wokwi](https://wokwi.com) to do a very early virtual prototype of the circuit.  Wokwi does not have FETS but it
-does have Relay's which can be used to simulate P and N channel MOSFETs. So that's what I did. I emulated N channel MOSFETs
-using Relay's on the high side of the circuit.  It worked exactly as I wanted it to.
+I used [wokwi](https://wokwi.com) to do a very early virtual prototype of the circuit. Wokwi does not have FETs, but it
+does have relays which can be used to simulate P-channel and N-channel MOSFETs. So that is what I did. I emulated N-channel MOSFETs
+using relays on the high side of the circuit. It worked exactly as I wanted it to.
 
-From there, I migrated to KiCad, designed the circuit, chose the components.
+From there, I moved to KiCad, designed the circuit, and selected components.
 
-Once I had the design in KiCad, I built a physical prototype on a breadboard. The prototype worked as I wanted it to. 
-However, I was losing more voltage than I thought I would.  I put this down to using over-sized components vs the surface
-mount ones the PCB would use.
+Once I had the design in KiCad, I built a physical prototype on a breadboard. The prototype worked as I wanted it to.
+However, I was losing more voltage than I expected. I attributed this to using through-hole components rather than the surface-mount ones the final PCB would use.
 
-Happy that the circuit worked, I exported the Gerber files and set it off to [JLCPCB](https://jlcpcb.com) to have some boards made.
+Comfortable that the circuit worked, I exported the Gerber files and sent it off to [JLCPCB](https://jlcpcb.com) to have some boards made.
 
-As soon as the boards arrived, I realized I made a mistake.  I had chosen the wrong SSD1306 footprint. I had chosen the 
-Adafruit SSD1306 footprint. But I did not buy the Adafruit SSD1306. I bought some simple 128x64 I2C SSD1306 modules.
-These modules are compatible with the Adafruit SSD1306 I2C, but have a very different footprint.
+As soon as the boards arrived, I realized I had made a mistake. I had used the Adafruit SSD1306 footprint but had not bought the Adafruit module. I bought some simple 128x64 I2C SSD1306 modules.
+These modules are compatible with the Adafruit SSD1306 I2C but have a very different footprint.
 
-Luckily, the four pins that matter to the circuit match, but the screen ends up off center and lower than where I planned.
+Luckily, the four pins that matter to the circuit match, but the screen ends up off-center and lower than planned.
 
-After assembling the first board, I was still losing more voltage than I thought I would. This (too late) is when I realized
-that AI had led me down a path that would not work. P-Channel MOSFETs require the gate voltage to be HIGHER than source voltage.
-I was the 5 volts from the Arduino as the gate voltage and trying to switch a 6 volt source. 
+After assembling the first board, I was still losing more voltage than expected. Only then — too late — did I realize
+that AI had led me down a dead end. N-channel MOSFETs require the gate voltage to be higher than the source voltage.
+I was using the 5 V from the Arduino as the gate voltage and trying to switch a 6 V source.
 
 I had three options:
 1. Add in a voltage booster (charge pump) to boost the gate voltage above that of the supply voltage.
-2. Redesign the whole thing using low side switching and N-Channel MOSFETs.
-3. Give up on the idea of "Ideal Diode" and use simple Schottky diodes instead. 
+2. Redesign the whole thing using low side switching and P-channel MOSFETs.
+3. Give up on the idea of "Ideal Diode" and use simple Schottky diodes instead.
 
-Since the circuit already had Schottky diodes, in it, and the voltage loss I would be taking is really not bad, I decided to go with option 3.
-This also meant that not only could I use the components I already had, I could still use the PCBs that I had created by simply 
-flipping one diode around, shorting out another, and jumping a 3rd diode instead of a MOSFET. 
+Since the circuit already had Schottky diodes in it, and the voltage loss was acceptable, I went with option 3.
+This also meant that not only could I use the components I already had, I could still use the PCBs that I had created by simply
+flipping one diode around, shorting out another, and bridging a third diode instead of a MOSFET.
 
 Lessons learned here:
- * Don't Trust AI to actually know what it's talking about
- * Don't try to overcomplicate things going for perfection instead of "good enough."
- * Quadruple check your footprints before ordering the boards.
+ * Do not trust AI to be correct about hardware specifics.
+ * Do not overcomplicate. Perfection is the enemy of done.
+ * Quadruple-check your footprints before ordering the boards.
 
 
 #### Case design
 
-I use FreeCad for all of my 3d cad work, but the case for this project had a couple of extra challenges.
-First, I wanted to be able to very-accurately design the case around the PCB and components. 
-Second, I wanted it to be multicolor. 
+I use FreeCAD for all of my 3D CAD work, but the case for this project had a couple of extra challenges.
+First, I wanted to design the case accurately around the PCB and components.
+Second, I wanted it to be multicolor.
 
-KiCad and FreeCad work very well together.  In KiCad, I imported the CORRECT SSD1306 module, aligned it to the Adafruit footprint,
-Loaded in the rest of the components, and then exported the whole PCB with all components as a 3mf (3d Manufacturing Format) file.
+KiCad and FreeCAD work well together. In KiCad, I imported the correct SSD1306 module, aligned it to the Adafruit footprint,
+loaded in the rest of the components, and then exported the whole PCB with all components as a 3MF (3D Manufacturing Format) file.
 
-In FreeCad, I imported the 3mf file, and started work on the case. Using the actual pcb dimensions as a guide, I was able to 
-create a very accurate case very quickly.
+In FreeCAD, I imported the 3MF file and started work on the case. Using the actual PCB dimensions as a guide, I was able to
+create an accurate case quickly.
 
-The more difficult part was getting the case to be multicolor.  I tried the lazy route first and sketched all the icons 
-directly onto the case, but this made it difficult to create the 2ndary bodies used for multicolor 3d printing. 
+The more challenging part was getting the case to be multicolor. I tried the lazy route first and sketched all the icons
+directly onto the case, but this made it difficult to create the secondary bodies used for multicolor 3D printing.
 
 I ended up reverting to the blank case and taking a detour to figure out how to:
-1. Create separate bodies for each icon / label
+1. Create separate bodies for each icon/label
 2. Create components to hold the separate bodies as a grouped object.
-3. Use a sketch inside an assembly to correctly and accurately position the components.
-4. Import those back into the main case design as cutting tools and as printable bodies. 
+3. Use a sketch inside an assembly to accurately position the components.
+4. Import those back into the main case design as cutting tools and as printable bodies.
 
 
-### Final Result 
+### Final Result
 
 ![Finished Servo Tester](./Servo-Tester-1.png)
 
-The final result for this iteration is a functional servo tester that satisfied all of my original requirements
-(and then some).  
+The result is a functional servo tester that met all of my original requirements — and exceeded a few.
 
-I ended up building a few of these, so I am planning on selling some of them on E-bay. 
-Sure, they are not production quality, but they are fully functional, more useful than the cheap ones, 
-and will be sold cheaper than the expensive ones. 
+I ended up building a few of these, so I am planning to sell some on eBay.
+They are not production quality, but they are fully functional, more capable than the low-cost options,
+and can be priced below the overcomplicated expensive testers.
 
 
 
