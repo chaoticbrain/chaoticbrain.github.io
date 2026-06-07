@@ -4,7 +4,7 @@ description: "Genuine E-flite replacement wheel hubs and landing gear retainer p
 custom_link_label: "View on eBay"
 custom_link: "https://www.ebay.com/itm/396153550931"
 updatedDate: "Mar 08 2026"
-pricing: "$8.00"
+pricing: "$10.00"
 checkoutUrl: "https://www.ebay.com/itm/396153550931"
 heroImage: "./product.webp"
 ---

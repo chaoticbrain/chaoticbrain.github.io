@@ -4,7 +4,7 @@ description: "Upgraded landing gear retainer plate for the E-flite Timber Evolut
 custom_link_label: "View on eBay"
 custom_link: "https://www.ebay.com/itm/396187447700"
 updatedDate: "Mar 08 2026"
-pricing: "$5.00"
+pricing: "$8.00"
 checkoutUrl: "https://www.ebay.com/itm/396187447700"
 heroImage: "./product.webp"
 ---

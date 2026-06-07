@@ -4,7 +4,7 @@ description: "Upgraded replacement landing gear retainer for the E-flite Timber.
 custom_link_label: "View on eBay"
 custom_link: "https://www.ebay.com/itm/396153533827"
 updatedDate: "Mar 08 2026"
-pricing: "$5.00"
+pricing: "$8.00"
 checkoutUrl: "https://www.ebay.com/itm/396153533827"
 heroImage: "./product.webp"
 ---
